@@ -18,7 +18,7 @@ function Header({
     <View
       style={{
         paddingHorizontal: 8,
-        paddingVertical: 4,
+        paddingVertical: 8,
         backgroundColor: colors.secondary,
         height: 56,
         flexDirection: "row",
