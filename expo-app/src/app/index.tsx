@@ -16,7 +16,15 @@ function Index() {
   const columnsNumber = isVertical ? 1 : 2;
 
   const RenderProduct = ({ item }: { item: ProductType }) => (
-    <ProductItemCard product={item} key={item.id} />
+    <View
+      style={{
+        flex: 1,
+        marginHorizontal: columnsNumber > 1 ? 4 : 0,
+        maxWidth: columnsNumber > 1 ? "50%" : "100%",
+      }}
+    >
+      <ProductItemCard product={item} key={item.id} />
+    </View>
   );
 
   return (
@@ -31,6 +39,14 @@ function Index() {
         ItemSeparatorComponent={ItemSeparatorComponent}
         numColumns={columnsNumber}
         key={columnsNumber}
+        /*columnWrapperStyle={
+          columnsNumber > 1
+            ? {
+                justifyContent: "space-between",
+                paddingHorizontal: 0,
+              }
+            : undefined
+        }*/
       />
     </View>
   );
