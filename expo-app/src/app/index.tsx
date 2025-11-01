@@ -1,9 +1,15 @@
-import { FlatList, useWindowDimensions, View } from "react-native";
+import {
+  FlatList,
+  TouchableOpacity,
+  useWindowDimensions,
+  View,
+} from "react-native";
 import ProductItemCard from "../components/cards/ProductItemCard";
 import { Header } from "../components/Views/Header";
 import { useProducts } from "../redux/slices/productsSlice/productsHooks";
 import { useColors } from "../redux/slices/themeSlice/colorsHooks";
 import { ProductType } from "../types/ProductType";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 function Index() {
   const colors = useColors();
@@ -34,17 +40,24 @@ function Index() {
       style={{ backgroundColor: colors.background }}
     >
       <Header title="Home" />
-      <View className=" flex-1 self-stretch px-3">
+      <View className=" flex-1 self-stretch">
         <FlatList
           data={products}
           renderItem={RenderProduct}
-          className=" self-stretch flex-1"
+          className=" self-stretch flex-1 px-3"
           ItemSeparatorComponent={ItemSeparatorComponent}
           numColumns={columnsNumber}
           key={columnsNumber}
           style={{ paddingVertical: 10 }}
           contentContainerStyle={{ paddingVertical: 10, paddingBottom: 30 }}
         />
+
+        <TouchableOpacity
+          className=" absolute right-2 bottom-2 justify-center items-center rounded-full w-[48px] h-[48px]"
+          style={{ backgroundColor: colors.primary }}
+        >
+          <FontAwesome6 name="plus" size={24} color={colors.text} />
+        </TouchableOpacity>
       </View>
     </View>
   );

@@ -1,13 +1,13 @@
-import { View, Text, TouchableOpacity } from "react-native";
-import React, { use } from "react";
+import React from "react";
+import { Text, TouchableOpacity, View } from "react-native";
+import { useDispatch } from "react-redux";
 import { Header } from "../components/Views/Header";
 import {
   useColors,
   useThemeMode,
 } from "../redux/slices/themeSlice/colorsHooks";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../redux/store";
 import { setThemeMode } from "../redux/slices/themeSlice/themeSlice";
+import { AppDispatch } from "../redux/store";
 
 const Settings = () => {
   const colors = useColors();
