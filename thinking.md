@@ -1,7 +1,7 @@
 ✅
 
-- Add Native wind
-- ADd redux
+- Add Native wind ✅
+- Add redux
 - Create a slice called Products
 - Create type: ProductType
 - Expo icons
