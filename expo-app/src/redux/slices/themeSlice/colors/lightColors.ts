@@ -2,7 +2,7 @@ import type { ThemeColorsType } from "./ThemeColorsType";
 
 const lightColors: ThemeColorsType = {
   primary: "#03DAC6",
-  secondary: "#6200EE",
+  secondary: "#ba89ff",
   background: "#FFFFFF",
   text: "#000000",
 };
