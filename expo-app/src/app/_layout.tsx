@@ -8,6 +8,8 @@ import {
   useThemeMode,
 } from "../redux/slices/themeSlice/colorsHooks";
 import { store } from "../redux/store";
+import { useIsAppInitialized } from "../hooks/useIsAppInitialized";
+import { ActivityIndicator, View } from "react-native";
 
 function RootLayout() {
   return (
@@ -20,6 +22,16 @@ function RootLayout() {
 const AppInsideRedux = () => {
   const colors = useColors();
   const themeMode = useThemeMode();
+
+  const isAppInitialized = useIsAppInitialized();
+
+  if (!isAppInitialized) {
+    return (
+      <View className=" self-stretch flex-1 justify-center items-center">
+        <ActivityIndicator size="large" color={colors.primary} />
+      </View>
+    );
+  }
 
   return (
     <SafeAreaView
