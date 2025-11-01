@@ -9,7 +9,6 @@ import { Image } from "expo-image";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
 import { Alert, ScrollView, Text, TouchableOpacity, View } from "react-native";
-import Toast from "react-native-toast-message";
 import { Toast as Toast2 } from "toastify-react-native";
 
 const ProductDetails = () => {
@@ -92,7 +91,13 @@ const ProductDetails = () => {
           onPress={showDeleteProductAlert}
           iconName="trash"
         />
-        <FooterButton text="Edit" onPress={() => {}} iconName="edit" />
+        <FooterButton
+          text="Edit"
+          onPress={() => {
+            router.push(`/product/edit/${product.id}`);
+          }}
+          iconName="edit"
+        />
       </View>
     </View>
   );

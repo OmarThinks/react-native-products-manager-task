@@ -1,10 +1,7 @@
 ✅
 
 - Product details screen:
-  - Header and styling
   - Edit functionality
-  - Delete functionality
-  - Install react native toast
 - Edit Screen
   - Start
 - Multiple select

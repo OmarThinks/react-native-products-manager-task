@@ -14,7 +14,7 @@ const ProductItemCard = ({ product }: { product: ProductType }) => {
       style={{
         borderColor: colors.text,
       }}
-      onPress={() => router.push(`/productDetails/${product.id}`)}
+      onPress={() => router.push(`/product/details/${product.id}`)}
     >
       <Image
         style={{ width: 100, height: 100, borderRadius: 8 }}
