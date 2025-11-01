@@ -5,5 +5,7 @@ const darkColors: ThemeColorsType = {
   secondary: "#BB86FC",
   background: "#121212",
   text: "#FFFFFF",
+  error: "red",
+  placeholder: "#AAAAAA",
 };
 export default darkColors;

@@ -5,5 +5,7 @@ const lightColors: ThemeColorsType = {
   secondary: "#ba89ff",
   background: "#FFFFFF",
   text: "#000000",
+  error: "red",
+  placeholder: "#AAAAAA",
 };
 export default lightColors;

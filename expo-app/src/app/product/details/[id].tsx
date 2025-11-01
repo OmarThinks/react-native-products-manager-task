@@ -16,7 +16,7 @@ const ProductDetails = () => {
   const products = useProducts();
 
   const product = products.find(
-    (item) => item.id === parseInt(id)
+    (item) => item.id === Number(id)
   ) as ProductType;
   const colors = useColors();
   const dispatch = useAppDispatch();
