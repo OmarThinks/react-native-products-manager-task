@@ -2,8 +2,8 @@
 
 - Add Native wind ✅
 - Add redux ✅
-- Create a slice called Products
-- Create type: ProductType
+- Create a slice called Products ✅
+- Create type: ProductType ✅
 - Expo icons
-- Redux initial state: the products list
-- Create a product component
+- Redux initial state: the products list ✅
+- Create a ProductItem component
