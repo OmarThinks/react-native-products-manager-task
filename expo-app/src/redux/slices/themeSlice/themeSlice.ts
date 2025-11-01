@@ -1,7 +1,9 @@
+import { StorageKeysEnum } from "@/src/storage/StorageKeysEnum";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ThemeColorsType } from "./colors/ThemeColorsType";
 import darkColors from "./colors/darkColors";
 import lightColors from "./colors/lightColors";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type ThemeState = {
   colors: ThemeColorsType;
@@ -30,6 +32,7 @@ const themeSlice = createSlice({
       const mode = action.payload.mode;
       state.themeMode = mode;
       state.colors = mode === "light" ? lightColors : darkColors;
+      AsyncStorage.setItem(StorageKeysEnum.THEME_MODE, mode);
     },
   },
 });
