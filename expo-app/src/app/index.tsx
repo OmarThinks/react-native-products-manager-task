@@ -1,9 +1,9 @@
 import { FlatList, useWindowDimensions, View } from "react-native";
 import ProductItemCard from "../components/cards/ProductItemCard";
+import { Header } from "../components/Views/Header";
 import { useProducts } from "../redux/slices/productsSlice/productsHooks";
 import { useColors } from "../redux/slices/themeSlice/colorsHooks";
 import { ProductType } from "../types/ProductType";
-import { Header } from "../components/Views/Header";
 
 function Index() {
   const colors = useColors();
@@ -33,7 +33,7 @@ function Index() {
       className=" flex-1 self-stretch"
       style={{ backgroundColor: colors.background }}
     >
-      <Header />
+      <Header title="Home" />
       <View className=" flex-1 self-stretch px-3 py-2">
         <FlatList
           data={products}
@@ -42,14 +42,6 @@ function Index() {
           ItemSeparatorComponent={ItemSeparatorComponent}
           numColumns={columnsNumber}
           key={columnsNumber}
-          /*columnWrapperStyle={
-          columnsNumber > 1
-            ? {
-                justifyContent: "space-between",
-                paddingHorizontal: 0,
-              }
-            : undefined
-        }*/
         />
       </View>
     </View>
