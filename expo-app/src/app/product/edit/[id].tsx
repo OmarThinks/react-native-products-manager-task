@@ -1,6 +1,7 @@
 import FooterButton from "@/src/components/Views/Footer/FooterButton";
 import { Header } from "@/src/components/Views/Header";
 import { useProducts } from "@/src/redux/slices/productsSlice/productsHooks";
+import { editSingleProduct } from "@/src/redux/slices/productsSlice/productsSlice";
 import { useColors } from "@/src/redux/slices/themeSlice/colorsHooks";
 import { useAppDispatch } from "@/src/redux/store";
 import { ProductType } from "@/src/types/ProductType";
@@ -14,12 +15,8 @@ import {
   TextInput,
   View,
 } from "react-native";
-import * as Yup from "yup";
-import {
-  addProduct,
-  editSingleProduct,
-} from "@/src/redux/slices/productsSlice/productsSlice";
 import { Toast } from "toastify-react-native";
+import * as Yup from "yup";
 
 const EditProduct = () => {
   const { id }: { id: string } = useLocalSearchParams();
@@ -63,39 +60,6 @@ const EditProduct = () => {
     },
   });
 
-  const FieldContainer = ({
-    title,
-    fieldName,
-    keyboardType,
-  }: {
-    title: string;
-    fieldName: "title" | "description" | "price" | "image";
-    keyboardType: KeyboardTypeOptions;
-  }) => {
-    return (
-      <View className=" self-stretch gap-2">
-        <Text className=" text-[24px] font-bold" style={{ color: colors.text }}>
-          {title}
-        </Text>
-        <TextInput
-          className=" border-b  p-2"
-          style={{ borderColor: colors.secondary, color: colors.text }}
-          value={String(formik.values[fieldName])}
-          onChangeText={formik.handleChange(fieldName)}
-          onBlur={formik.handleBlur(fieldName)}
-          placeholder={`Enter product ${fieldName}`}
-          keyboardType={keyboardType}
-          placeholderTextColor={colors.placeholder}
-        />
-        {formik.touched[fieldName] && formik.errors[fieldName] && (
-          <Text style={{ color: colors.error }}>
-            {formik.errors[fieldName]}
-          </Text>
-        )}
-      </View>
-    );
-  };
-
   return (
     <View
       className=" self-stretch flex-1"
@@ -111,18 +75,26 @@ const EditProduct = () => {
             title="Title"
             fieldName="title"
             keyboardType="default"
+            formik={formik}
           />
           <FieldContainer
             title="Description"
             fieldName="description"
             keyboardType="default"
+            formik={formik}
           />
           <FieldContainer
             title="Price"
             fieldName="price"
             keyboardType="numeric"
+            formik={formik}
           />
-          <FieldContainer title="Image" fieldName="image" keyboardType="url" />
+          <FieldContainer
+            title="Image"
+            fieldName="image"
+            keyboardType="url"
+            formik={formik}
+          />
         </View>
       </ScrollView>
 
@@ -136,6 +108,41 @@ const EditProduct = () => {
           iconName="save"
         />
       </View>
+    </View>
+  );
+};
+
+const FieldContainer = ({
+  title,
+  fieldName,
+  keyboardType,
+  formik,
+}: {
+  title: string;
+  fieldName: "title" | "description" | "price" | "image";
+  keyboardType: KeyboardTypeOptions;
+  formik: ReturnType<typeof useFormik<typeof EditProductSchema.__outputType>>;
+}) => {
+  const colors = useColors();
+
+  return (
+    <View className=" self-stretch gap-2">
+      <Text className=" text-[24px] font-bold" style={{ color: colors.text }}>
+        {title}
+      </Text>
+      <TextInput
+        className=" border-b  p-2"
+        style={{ borderColor: colors.secondary, color: colors.text }}
+        value={String(formik.values[fieldName])}
+        onChangeText={formik.handleChange(fieldName)}
+        onBlur={formik.handleBlur(fieldName)}
+        placeholder={`Enter product ${fieldName}`}
+        keyboardType={keyboardType}
+        placeholderTextColor={colors.placeholder}
+      />
+      {formik.touched[fieldName] && formik.errors[fieldName] && (
+        <Text style={{ color: colors.error }}>{formik.errors[fieldName]}</Text>
+      )}
     </View>
   );
 };
