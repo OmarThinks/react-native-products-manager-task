@@ -1,6 +1,6 @@
 import { ProductType } from "@/src/types/ProductType";
-import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { initialProducts } from "./initialProducts";
 
 type ProductsStateType = {
@@ -13,19 +13,22 @@ const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    deleteSingle: (state, action: PayloadAction<{ id: number }>) => {
+    deleteSingleProduct: (state, action: PayloadAction<{ id: number }>) => {
       const productId = action.payload.id;
       state.productsList = state.productsList.filter(
         (product) => product.id !== productId
       );
     },
-    deleteMultiple: (state, action: PayloadAction<{ ids: number[] }>) => {
+    deleteMultipleProducts: (
+      state,
+      action: PayloadAction<{ ids: number[] }>
+    ) => {
       const productIds = action.payload.ids;
       state.productsList = state.productsList.filter(
         (product) => !productIds.includes(product.id)
       );
     },
-    editSingle: (
+    editSingleProduct: (
       state,
       action: PayloadAction<{ updatedProduct: ProductType }>
     ) => {
@@ -44,4 +47,18 @@ const productsSlice = createSlice({
   },
 });
 
-export { ProductsStateType, productsSlice };
+const {
+  deleteSingleProduct,
+  deleteMultipleProducts,
+  editSingleProduct,
+  addProduct,
+} = productsSlice.actions;
+
+export {
+  addProduct,
+  deleteMultipleProducts,
+  deleteSingleProduct,
+  editSingleProduct,
+  productsSlice,
+  ProductsStateType,
+};

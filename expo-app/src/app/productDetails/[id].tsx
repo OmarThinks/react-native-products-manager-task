@@ -1,17 +1,46 @@
 import { Header } from "@/src/components/Views/Header";
 import { useProducts } from "@/src/redux/slices/productsSlice/productsHooks";
+import { deleteSingleProduct } from "@/src/redux/slices/productsSlice/productsSlice";
 import { useColors } from "@/src/redux/slices/themeSlice/colorsHooks";
+import { useAppDispatch } from "@/src/redux/store";
+import { ProductType } from "@/src/types/ProductType";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { Image } from "expo-image";
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Alert, ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 const ProductDetails = () => {
   const { id }: { id: string } = useLocalSearchParams();
   const products = useProducts();
 
-  const product = products.find((item) => item.id === parseInt(id));
+  const product = products.find(
+    (item) => item.id === parseInt(id)
+  ) as ProductType;
   const colors = useColors();
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const showDeleteProductAlert = () => {
+    Alert.alert(
+      "Delete Product",
+      "Are you sure you want to delete this product?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "Delete",
+          onPress: () => {
+            dispatch(deleteSingleProduct({ id: product.id }));
+            router.back();
+          },
+          style: "destructive",
+        },
+      ]
+    );
+  };
 
   return (
     <View
@@ -55,8 +84,12 @@ const ProductDetails = () => {
         style={{ backgroundColor: colors.primary }}
         className=" self-stretch flex-row justify-between items-center px-2 py-3 gap-4"
       >
-        <FooterButton text="Add to Cart" onPress={() => {}} />
-        <FooterButton text="Buy Now" onPress={() => {}} />
+        <FooterButton
+          text="Delete"
+          onPress={showDeleteProductAlert}
+          iconName="trash"
+        />
+        <FooterButton text="Edit" onPress={() => {}} iconName="edit" />
       </View>
     </View>
   );
@@ -65,9 +98,11 @@ const ProductDetails = () => {
 const FooterButton = ({
   text,
   onPress,
+  iconName,
 }: {
   text: string;
   onPress: () => void;
+  iconName: string;
 }) => {
   const colors = useColors();
 
@@ -79,8 +114,9 @@ const FooterButton = ({
         padding: 12,
         borderRadius: 8,
       }}
-      className=" flex-1 justify-center items-center"
+      className=" flex-1 justify-center items-center flex-row gap-2"
     >
+      <FontAwesome6 name={iconName} size={16} color={colors.text} />
       <Text
         style={{ color: colors.text }}
         className=" text-[16px] font-semibold"

@@ -1,3 +1,4 @@
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import {
   FlatList,
   TouchableOpacity,
@@ -9,7 +10,6 @@ import { Header } from "../components/Views/Header";
 import { useProducts } from "../redux/slices/productsSlice/productsHooks";
 import { useColors } from "../redux/slices/themeSlice/colorsHooks";
 import { ProductType } from "../types/ProductType";
-import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 function Index() {
   const colors = useColors();
