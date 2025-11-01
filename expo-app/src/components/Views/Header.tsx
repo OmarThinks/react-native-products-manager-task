@@ -1,6 +1,8 @@
 import { useColors } from "@/src/redux/slices/themeSlice/colorsHooks";
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import { router } from "expo-router";
 
 function Header({
   title,
@@ -15,7 +17,8 @@ function Header({
     <View
       style={{
         paddingHorizontal: 16,
-        backgroundColor: colors.primary,
+        paddingVertical: 4,
+        backgroundColor: colors.secondary,
         height: 56,
         flexDirection: "row",
         alignItems: "center",
@@ -29,7 +32,14 @@ function Header({
       </Text>
 
       {shouldDisplaySettings && (
-        <Text style={{ color: colors.text }}>Settings</Text>
+        <TouchableOpacity
+          className=" rounded-full self-stretch aspect-square justify-center items-center"
+          onPress={() => {
+            router.navigate("/settings");
+          }}
+        >
+          <FontAwesome6 name="gear" size={24} color={colors.text} />
+        </TouchableOpacity>
       )}
     </View>
   );

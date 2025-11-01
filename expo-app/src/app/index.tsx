@@ -34,7 +34,7 @@ function Index() {
       style={{ backgroundColor: colors.background }}
     >
       <Header title="Home" />
-      <View className=" flex-1 self-stretch px-3 py-2">
+      <View className=" flex-1 self-stretch px-3">
         <FlatList
           data={products}
           renderItem={RenderProduct}
@@ -42,6 +42,8 @@ function Index() {
           ItemSeparatorComponent={ItemSeparatorComponent}
           numColumns={columnsNumber}
           key={columnsNumber}
+          style={{ paddingVertical: 10 }}
+          contentContainerStyle={{ paddingVertical: 10, paddingBottom: 30 }}
         />
       </View>
     </View>
