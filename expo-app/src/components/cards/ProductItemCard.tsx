@@ -33,6 +33,12 @@ const ProductItemCard = ({ product }: { product: ProductType }) => {
           {product.price}
         </Text>
       </Text>
+      <Text style={{ color: colors.text }} numberOfLines={1}>
+        ID: {product.id}
+      </Text>
+      <Text style={{ color: colors.text }} numberOfLines={1}>
+        Tags: {product.tags.join(", ")}
+      </Text>
     </View>
   );
 };
