@@ -7,18 +7,35 @@ const ProductItemCard = ({ product }: { product: ProductType }) => {
   const colors = useColors();
   return (
     <View
-      className=" self-stretch "
+      className=" self-stretch rounded-[8px] border px-2 py-3"
       style={{
-        padding: 16,
-        borderWidth: 1,
-        borderRadius: 8,
+        //paddingHorizontal: 8,
+        //paddingVertical: 12,
+        //borderWidth: 1,
         borderColor: colors.text,
-        flex: 1,
+        //flex: 1,
       }}
     >
-      <Text style={{ color: colors.text }}>{product.title}</Text>
-      <Text style={{ color: colors.text }}>{product.description}</Text>
-      <Text style={{ color: colors.text }}>{product.price}</Text>
+      <Text
+        style={{ color: colors.primary }}
+        className=" text-[20px] font-bold"
+        numberOfLines={1}
+      >
+        {product.title}
+      </Text>
+      <Text style={{ color: colors.text }} numberOfLines={1}>
+        {product.description}
+      </Text>
+      <Text
+        style={{ color: colors.text }}
+        numberOfLines={1}
+        className=" font-semibold"
+      >
+        $
+        <Text style={{ color: colors.secondary }} numberOfLines={1}>
+          {product.price}
+        </Text>
+      </Text>
     </View>
   );
 };
