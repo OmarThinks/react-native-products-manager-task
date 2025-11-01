@@ -10,6 +10,8 @@ import {
 import { store } from "../redux/store";
 import { useIsAppInitialized } from "../hooks/useIsAppInitialized";
 import { ActivityIndicator, View } from "react-native";
+import Toast from "react-native-toast-message";
+import ToastManager from "toastify-react-native";
 
 function RootLayout() {
   return (
@@ -34,17 +36,21 @@ const AppInsideRedux = () => {
   }
 
   return (
-    <SafeAreaView
-      style={{ backgroundColor: colors.background }}
-      className=" self-stretch flex-1"
-    >
-      <StatusBar style={themeMode === "dark" ? "light" : "dark"} />
-      <Stack
-        screenOptions={{
-          headerShown: false,
-        }}
-      />
-    </SafeAreaView>
+    <>
+      <SafeAreaView
+        style={{ backgroundColor: colors.background }}
+        className=" self-stretch flex-1"
+      >
+        <ToastManager />
+
+        <StatusBar style={themeMode === "dark" ? "light" : "dark"} />
+        <Stack
+          screenOptions={{
+            headerShown: false,
+          }}
+        />
+      </SafeAreaView>
+    </>
   );
 };
 

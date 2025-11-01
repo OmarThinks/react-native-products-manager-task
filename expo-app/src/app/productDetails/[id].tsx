@@ -9,6 +9,8 @@ import { Image } from "expo-image";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
 import { Alert, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import Toast from "react-native-toast-message";
+import { Toast as Toast2 } from "toastify-react-native";
 
 const ProductDetails = () => {
   const { id }: { id: string } = useLocalSearchParams();
@@ -35,6 +37,7 @@ const ProductDetails = () => {
           onPress: () => {
             dispatch(deleteSingleProduct({ id: product.id }));
             router.back();
+            Toast2.success("Product deleted successfully 🎉");
           },
           style: "destructive",
         },
