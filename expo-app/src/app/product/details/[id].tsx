@@ -1,3 +1,4 @@
+import FooterButton from "@/src/components/Views/Footer/FooterButton";
 import { Header } from "@/src/components/Views/Header";
 import { useProducts } from "@/src/redux/slices/productsSlice/productsHooks";
 import { deleteSingleProduct } from "@/src/redux/slices/productsSlice/productsSlice";
@@ -100,38 +101,6 @@ const ProductDetails = () => {
         />
       </View>
     </View>
-  );
-};
-
-const FooterButton = ({
-  text,
-  onPress,
-  iconName,
-}: {
-  text: string;
-  onPress: () => void;
-  iconName: string;
-}) => {
-  const colors = useColors();
-
-  return (
-    <TouchableOpacity
-      onPress={onPress}
-      style={{
-        backgroundColor: colors.secondary,
-        padding: 12,
-        borderRadius: 8,
-      }}
-      className=" flex-1 justify-center items-center flex-row gap-2"
-    >
-      <FontAwesome6 name={iconName} size={16} color={colors.text} />
-      <Text
-        style={{ color: colors.text }}
-        className=" text-[16px] font-semibold"
-      >
-        {text}
-      </Text>
-    </TouchableOpacity>
   );
 };
 

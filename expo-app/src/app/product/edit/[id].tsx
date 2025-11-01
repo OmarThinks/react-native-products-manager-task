@@ -1,8 +1,10 @@
+import FooterButton from "@/src/components/Views/Footer/FooterButton";
 import { Header } from "@/src/components/Views/Header";
 import { useProducts } from "@/src/redux/slices/productsSlice/productsHooks";
 import { useColors } from "@/src/redux/slices/themeSlice/colorsHooks";
+import { useAppDispatch } from "@/src/redux/store";
 import { ProductType } from "@/src/types/ProductType";
-import { useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { useFormik } from "formik";
 import React from "react";
 import {
@@ -13,6 +15,11 @@ import {
   View,
 } from "react-native";
 import * as Yup from "yup";
+import {
+  addProduct,
+  editSingleProduct,
+} from "@/src/redux/slices/productsSlice/productsSlice";
+import { Toast } from "toastify-react-native";
 
 const EditProduct = () => {
   const { id }: { id: string } = useLocalSearchParams();
@@ -24,6 +31,8 @@ const EditProduct = () => {
 
   const colors = useColors();
 
+  const dispatch = useAppDispatch();
+
   const formik = useFormik({
     initialValues: {
       title: product.title,
@@ -34,6 +43,23 @@ const EditProduct = () => {
     validationSchema: EditProductSchema,
     onSubmit: (values) => {
       // Handle form submission
+      formik.validateForm();
+      if (formik.isValid) {
+        dispatch(
+          editSingleProduct({
+            updatedProduct: {
+              id: product.id,
+              title: values.title,
+              description: values.description,
+              price: Number(values.price),
+              image: values.image,
+              tags: product.tags,
+            },
+          })
+        );
+        router.back();
+        Toast.success("Product edited successfully 🎉");
+      }
     },
   });
 
@@ -77,7 +103,7 @@ const EditProduct = () => {
     >
       <Header title="Edit Product" />
       <ScrollView
-        className=" self-stretch"
+        className=" self-stretch flex-1"
         contentContainerClassName=" px-2 py-4"
       >
         <View className=" self-stretch  gap-4">
@@ -99,6 +125,17 @@ const EditProduct = () => {
           <FieldContainer title="Image" fieldName="image" keyboardType="url" />
         </View>
       </ScrollView>
+
+      <View
+        style={{ backgroundColor: colors.primary }}
+        className=" self-stretch flex-row justify-between items-center px-2 py-3 gap-4"
+      >
+        <FooterButton
+          text="Save"
+          onPress={formik.handleSubmit}
+          iconName="save"
+        />
+      </View>
     </View>
   );
 };
