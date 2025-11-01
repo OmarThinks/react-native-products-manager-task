@@ -1,9 +1,9 @@
-import { View, Text } from "react-native";
-import React from "react";
-import { useLocalSearchParams, useGlobalSearchParams, Link } from "expo-router";
 import { useProducts } from "@/src/redux/slices/productsSlice/productsHooks";
 import { useColors } from "@/src/redux/slices/themeSlice/colorsHooks";
 import { Image } from "expo-image";
+import { useLocalSearchParams } from "expo-router";
+import React from "react";
+import { Text, View } from "react-native";
 
 const ProductDetails = () => {
   const { id }: { id: string } = useLocalSearchParams();

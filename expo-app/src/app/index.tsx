@@ -3,6 +3,7 @@ import ProductItemCard from "../components/cards/ProductItemCard";
 import { useProducts } from "../redux/slices/productsSlice/productsHooks";
 import { useColors } from "../redux/slices/themeSlice/colorsHooks";
 import { ProductType } from "../types/ProductType";
+import { Header } from "../components/Views/Header";
 
 function Index() {
   const colors = useColors();
@@ -29,17 +30,19 @@ function Index() {
 
   return (
     <View
-      className=" flex-1 self-stretch px-3 py-4"
+      className=" flex-1 self-stretch"
       style={{ backgroundColor: colors.background }}
     >
-      <FlatList
-        data={products}
-        renderItem={RenderProduct}
-        className=" self-stretch flex-1"
-        ItemSeparatorComponent={ItemSeparatorComponent}
-        numColumns={columnsNumber}
-        key={columnsNumber}
-        /*columnWrapperStyle={
+      <Header />
+      <View className=" flex-1 self-stretch px-3 py-2">
+        <FlatList
+          data={products}
+          renderItem={RenderProduct}
+          className=" self-stretch flex-1"
+          ItemSeparatorComponent={ItemSeparatorComponent}
+          numColumns={columnsNumber}
+          key={columnsNumber}
+          /*columnWrapperStyle={
           columnsNumber > 1
             ? {
                 justifyContent: "space-between",
@@ -47,7 +50,8 @@ function Index() {
               }
             : undefined
         }*/
-      />
+        />
+      </View>
     </View>
   );
 }

@@ -1,14 +1,13 @@
 import "@/src/global.css";
 import { Stack } from "expo-router";
-import { Provider as ReduxProvider } from "react-redux";
-import { store } from "../redux/store";
+import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { View } from "react-native";
+import { Provider as ReduxProvider } from "react-redux";
 import {
   useColors,
   useThemeMode,
 } from "../redux/slices/themeSlice/colorsHooks";
-import { StatusBar } from "expo-status-bar";
+import { store } from "../redux/store";
 
 function RootLayout() {
   return (
