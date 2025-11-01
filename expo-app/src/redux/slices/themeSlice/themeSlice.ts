@@ -8,10 +8,16 @@ type ThemeState = {
   themeMode: "light" | "dark";
 };
 
-const initialState: ThemeState = {
+let initialState: ThemeState = {
   colors: darkColors,
   themeMode: "dark",
 };
+
+/*
+initialState = {
+  colors: lightColors,
+  themeMode: "light",
+};*/
 
 const themeSlice = createSlice({
   name: "theme",

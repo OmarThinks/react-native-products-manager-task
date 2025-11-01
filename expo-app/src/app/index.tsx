@@ -1,17 +1,20 @@
 import { Text, View } from "react-native";
+import { useColors } from "../redux/slices/themeSlice/hooks";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
+  const colors = useColors();
+
   return (
     <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
+      className=" flex-1 self-stretch"
+      style={{ backgroundColor: colors.background }}
     >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+      <Text style={{ color: colors.text }}>
+        Edit app/index.tsx to edit this screen.
+      </Text>
 
-      <Text className="text-xl font-bold text-#020203-500">
+      <Text className="text-xl font-bold " style={{ color: colors.text }}>
         Welcome to Nativewind!
       </Text>
     </View>
