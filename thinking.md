@@ -1,9 +1,6 @@
 ✅
 
-- Add Native wind ✅
-- Add redux ✅
-- Create a slice called Products ✅
-- Create type: ProductType ✅
+- Read if horizontal or vertical
+- Render based on horizontal or vertical
+- Display the image
 - Expo icons
-- Redux initial state: the products list ✅
-- Create a ProductItem component

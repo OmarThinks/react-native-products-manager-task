@@ -5,15 +5,12 @@ import { useColors } from "@/src/redux/slices/themeSlice/colorsHooks";
 
 const ProductItemCard = ({ product }: { product: ProductType }) => {
   const colors = useColors();
+
   return (
     <View
       className=" self-stretch rounded-[8px] border px-2 py-3"
       style={{
-        //paddingHorizontal: 8,
-        //paddingVertical: 12,
-        //borderWidth: 1,
         borderColor: colors.text,
-        //flex: 1,
       }}
     >
       <Text

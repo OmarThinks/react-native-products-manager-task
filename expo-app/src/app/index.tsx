@@ -1,4 +1,4 @@
-import { FlatList, View } from "react-native";
+import { FlatList, useWindowDimensions, View } from "react-native";
 import ProductItemCard from "../components/cards/ProductItemCard";
 import { useProducts } from "../redux/slices/productsSlice/productsHooks";
 import { useColors } from "../redux/slices/themeSlice/colorsHooks";
@@ -9,6 +9,11 @@ function Index() {
   const _products = useProducts();
 
   const products = _products;
+
+  const { width, height } = useWindowDimensions();
+
+  const isVertical = height > width;
+  const columnsNumber = isVertical ? 1 : 2;
 
   const RenderProduct = ({ item }: { item: ProductType }) => (
     <ProductItemCard product={item} key={item.id} />
@@ -24,6 +29,8 @@ function Index() {
         renderItem={RenderProduct}
         className=" self-stretch flex-1"
         ItemSeparatorComponent={ItemSeparatorComponent}
+        numColumns={columnsNumber}
+        key={columnsNumber}
       />
     </View>
   );
