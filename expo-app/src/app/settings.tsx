@@ -17,7 +17,7 @@ const Settings = () => {
       className=" flex-1 self-stretch"
       style={{ backgroundColor: colors.background }}
     >
-      <Header title="Settings" />
+      <Header title="Settings" shouldHideSettings />
       <View className=" flex-1 self-stretch px-3">
         <View className=" self-stretch gap-2">
           <Text

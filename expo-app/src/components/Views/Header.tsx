@@ -6,10 +6,10 @@ import { Text, TouchableOpacity, View } from "react-native";
 
 function Header({
   title,
-  shouldDisplaySettings = true,
+  shouldHideSettings = false,
 }: {
   title: string;
-  shouldDisplaySettings?: boolean;
+  shouldHideSettings?: boolean;
 }) {
   const colors = useColors();
   const { canGoBack, back } = useRouter();
@@ -43,7 +43,7 @@ function Header({
         {title}
       </Text>
 
-      {shouldDisplaySettings && (
+      {!shouldHideSettings && (
         <TouchableOpacity
           className=" rounded-full self-stretch aspect-square justify-center items-center border"
           onPress={() => {
