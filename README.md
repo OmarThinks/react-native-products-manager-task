@@ -33,66 +33,66 @@
 
 ## Screen Shots:
 
+Home screen: dark Theme 👇
+
 <img alt="Screenshots" src="./media/screenshots/01.png" width="400" />
 
-Home screen: dark Theme
-
 ---
+
+Ability to change theme 👇
 
 <img alt="Screenshots" src="./media/screenshots/02.png" width="400" />
 
-Ability to change theme
-
 ---
+
+Home screen: light Theme 👇
 
 <img alt="Screenshots" src="./media/screenshots/03.png" width="400" />
 
-Home screen: light Theme
-
 ---
+
+Ability to reset products to initial state 👇
 
 <img alt="Screenshots" src="./media/screenshots/04.png" width="400" />
 
-Ability to reset products to initial state
-
 ---
+
+Sorting and searching 👇
 
 <img alt="Screenshots" src="./media/screenshots/05.png" width="400" />
 
-Sorting and searching
-
 ---
+
+Product details screen 👇
 
 <img alt="Screenshots" src="./media/screenshots/06.png" width="400" />
 
-Product details screen
-
 ---
+
+Ability to delete products 👇
 
 <img alt="Screenshots" src="./media/screenshots/07.png" width="400" />
 
-Ability to delete products
-
 ---
+
+Ability to Edit Product 👇
 
 <img alt="Screenshots" src="./media/screenshots/08.png" width="400" />
 
-Ability to Edit Product
-
 ---
+
+Ability to Create Product 👇
 
 <img alt="Screenshots" src="./media/screenshots/09.png" width="400" />
 
-Ability to Create Product
-
 ---
+
+Product Creation validation 👇
 
 <img alt="Screenshots" src="./media/screenshots/10.png" width="400" />
 
-Product Creation validation
-
 ---
 
-<img alt="Screenshots" src="./media/screenshots/11.png" />
+Horizontal mode with two columns 👇
 
-Horizontal mode with two columns
+<img alt="Screenshots" src="./media/screenshots/11.png" />
