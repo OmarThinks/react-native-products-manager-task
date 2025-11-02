@@ -36,6 +36,14 @@ function Index() {
       const productTitle = product.title.trim().toLowerCase();
       if (productTitle.includes(realSearchText)) {
         filteredProducts.push(product);
+        continue;
+      }
+      for (const tag of product.tags) {
+        const productTag = tag.trim().toLowerCase();
+        if (productTag.includes(realSearchText)) {
+          filteredProducts.push(product);
+          break;
+        }
       }
     }
 
