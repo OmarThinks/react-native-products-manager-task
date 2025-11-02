@@ -1,7 +1,6 @@
 ✅
 
 - Any thing else?
-- App icon
 - Ability to create product
 
 # Auth:
