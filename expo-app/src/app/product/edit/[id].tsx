@@ -42,6 +42,7 @@ const EditProduct = () => {
       // Handle form submission
       formik.validateForm();
       if (formik.isValid) {
+        router.back();
         dispatch(
           editSingleProduct({
             updatedProduct: {
@@ -54,7 +55,6 @@ const EditProduct = () => {
             },
           })
         );
-        router.back();
         Toast.success("Product edited successfully 🎉");
       }
     },

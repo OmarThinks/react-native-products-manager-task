@@ -10,7 +10,7 @@
     "web": "expo start --web",
     "lint": "expo lint",
     "prebuild": "expo prebuild --platform android",
-    "generateApk": "eas build --platform android --profile development --local"
+    "generateApk": "eas build --platform android --profile productionApk --local"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",

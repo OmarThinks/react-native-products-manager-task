@@ -15,6 +15,7 @@
       "autoIncrement": true
     },
     "productionApk": {
+      "distribution": "internal",
       "android": {
         "buildType": "apk"
       }

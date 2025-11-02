@@ -5,11 +5,10 @@ import { deleteSingleProduct } from "@/src/redux/slices/productsSlice/productsSl
 import { useColors } from "@/src/redux/slices/themeSlice/colorsHooks";
 import { useAppDispatch } from "@/src/redux/store";
 import { ProductType } from "@/src/types/ProductType";
-import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { Image } from "expo-image";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
-import { Alert, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Alert, ScrollView, Text, View } from "react-native";
 import { Toast as Toast2 } from "toastify-react-native";
 
 const ProductDetails = () => {
@@ -35,8 +34,8 @@ const ProductDetails = () => {
         {
           text: "Delete",
           onPress: () => {
-            dispatch(deleteSingleProduct({ id: product.id }));
             router.back();
+            dispatch(deleteSingleProduct({ id: product.id }));
             Toast2.success("Product deleted successfully 🎉");
           },
           style: "destructive",
@@ -44,6 +43,10 @@ const ProductDetails = () => {
       ]
     );
   };
+
+  if (product === undefined) {
+    return null;
+  }
 
   return (
     <View
@@ -95,7 +98,7 @@ const ProductDetails = () => {
         <FooterButton
           text="Edit"
           onPress={() => {
-            router.push(`/product/edit/${product.id}`);
+            router.push(`/product/edit/${product?.id}`);
           }}
           iconName="edit"
         />

@@ -116,7 +116,7 @@ function Index() {
       className=" flex-1 self-stretch"
       style={{ backgroundColor: colors.background }}
     >
-      <Header title="Home" />
+      <Header title="Home" shouldHideBackButton />
       <View className=" flex-1 self-stretch">
         <TextInput
           placeholder="Search..."

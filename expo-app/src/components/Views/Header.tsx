@@ -7,9 +7,11 @@ import { Text, TouchableOpacity, View } from "react-native";
 function Header({
   title,
   shouldHideSettings = false,
+  shouldHideBackButton = false,
 }: {
   title: string;
   shouldHideSettings?: boolean;
+  shouldHideBackButton?: boolean;
 }) {
   const colors = useColors();
   const { canGoBack, back } = useRouter();
@@ -26,7 +28,7 @@ function Header({
         gap: 8,
       }}
     >
-      {canGoBack() && (
+      {canGoBack() && !shouldHideBackButton && (
         <TouchableOpacity
           className=" rounded-full self-stretch aspect-square justify-center items-center border"
           onPress={back}
