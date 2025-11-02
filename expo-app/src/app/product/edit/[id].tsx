@@ -30,7 +30,7 @@ const EditProduct = () => {
 
   const dispatch = useAppDispatch();
 
-  const formik = useFormik({
+  const formik = useFormik<useFormikPropType_EditProduct>({
     initialValues: {
       title: product.title,
       description: product.description,
@@ -121,7 +121,7 @@ const FieldContainer = ({
   title: string;
   fieldName: "title" | "description" | "price" | "image";
   keyboardType: KeyboardTypeOptions;
-  formik: ReturnType<typeof useFormik<typeof EditProductSchema.__outputType>>;
+  formik: ReturnType<typeof useFormik<useFormikPropType_EditProduct>>;
 }) => {
   const colors = useColors();
 
@@ -147,6 +147,13 @@ const FieldContainer = ({
   );
 };
 
+type useFormikPropType_EditProduct = {
+  title: string;
+  description: string;
+  price: number;
+  image?: string;
+};
+
 const EditProductSchema = Yup.object().shape({
   title: Yup.string()
     .min(3, "Too Short!")
@@ -161,4 +168,5 @@ const EditProductSchema = Yup.object().shape({
 });
 
 export default EditProduct;
-export { EditProductSchema };
+export { EditProductSchema, FieldContainer };
+export type { useFormikPropType_EditProduct };

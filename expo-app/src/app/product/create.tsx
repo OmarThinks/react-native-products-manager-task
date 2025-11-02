@@ -6,27 +6,25 @@ import { useAppDispatch } from "@/src/redux/store";
 import { router } from "expo-router";
 import { useFormik } from "formik";
 import React from "react";
-import {
-  KeyboardTypeOptions,
-  ScrollView,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { ScrollView, View } from "react-native";
 import { Toast } from "toastify-react-native";
-import { EditProductSchema } from "./edit/[id]";
+import {
+  EditProductSchema,
+  FieldContainer,
+  useFormikPropType_EditProduct,
+} from "./edit/[id]";
 
 const CreateProduct = () => {
   const colors = useColors();
 
   const dispatch = useAppDispatch();
 
-  const formik = useFormik({
+  const formik = useFormik<useFormikPropType_EditProduct>({
     initialValues: {
       title: "",
       description: "",
       price: 0,
-      image: "",
+      image: undefined,
     },
     validationSchema: EditProductSchema,
     onSubmit: (values) => {
@@ -99,41 +97,6 @@ const CreateProduct = () => {
           iconName="plus"
         />
       </View>
-    </View>
-  );
-};
-
-const FieldContainer = ({
-  title,
-  fieldName,
-  keyboardType,
-  formik,
-}: {
-  title: string;
-  fieldName: "title" | "description" | "price" | "image";
-  keyboardType: KeyboardTypeOptions;
-  formik: ReturnType<typeof useFormik<typeof EditProductSchema.__outputType>>;
-}) => {
-  const colors = useColors();
-
-  return (
-    <View className=" self-stretch gap-2">
-      <Text className=" text-[24px] font-bold" style={{ color: colors.text }}>
-        {title}
-      </Text>
-      <TextInput
-        className=" border-b  p-2"
-        style={{ borderColor: colors.secondary, color: colors.text }}
-        value={String(formik.values[fieldName])}
-        onChangeText={formik.handleChange(fieldName)}
-        onBlur={formik.handleBlur(fieldName)}
-        placeholder={`Enter product ${fieldName}`}
-        keyboardType={keyboardType}
-        placeholderTextColor={colors.placeholder}
-      />
-      {formik.touched[fieldName] && formik.errors[fieldName] && (
-        <Text style={{ color: colors.error }}>{formik.errors[fieldName]}</Text>
-      )}
     </View>
   );
 };
