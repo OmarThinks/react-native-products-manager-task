@@ -20,8 +20,8 @@ import { ProductType } from "../types/ProductType";
 
 enum SortModeEnum {
   None,
-  Price_Asc,
   Price_Desc,
+  Price_Asc,
 }
 
 function Index() {
@@ -33,29 +33,38 @@ function Index() {
 
   const products = useMemo(() => {
     const realSearchText = searchText.trim().toLowerCase();
-    if (realSearchText.length < 3) {
-      return _products;
-    }
+
+    const isSearchEffective = realSearchText.length >= 3;
 
     const filteredProducts: ProductType[] = [];
 
-    for (const product of _products) {
-      const productTitle = product.title.trim().toLowerCase();
-      if (productTitle.includes(realSearchText)) {
-        filteredProducts.push(product);
-        continue;
-      }
-      for (const tag of product.tags) {
-        const productTag = tag.trim().toLowerCase();
-        if (productTag.includes(realSearchText)) {
+    if (isSearchEffective === false) {
+      filteredProducts.push(..._products);
+    } else {
+      for (const product of _products) {
+        const productTitle = product.title.trim().toLowerCase();
+        if (productTitle.includes(realSearchText)) {
           filteredProducts.push(product);
-          break;
+          continue;
+        }
+        for (const tag of product.tags) {
+          const productTag = tag.trim().toLowerCase();
+          if (productTag.includes(realSearchText)) {
+            filteredProducts.push(product);
+            break;
+          }
         }
       }
     }
 
+    if (sortMode === SortModeEnum.Price_Asc) {
+      filteredProducts.sort((a, b) => a.price - b.price);
+    } else if (sortMode === SortModeEnum.Price_Desc) {
+      filteredProducts.sort((a, b) => b.price - a.price);
+    }
+
     return filteredProducts;
-  }, [_products, searchText]);
+  }, [_products, searchText, sortMode]);
 
   const { width, height } = useWindowDimensions();
   const dispatch = useDispatch();
@@ -144,10 +153,10 @@ function Index() {
           style={{ backgroundColor: colors.primary }}
           onPress={() => {
             if (sortMode === SortModeEnum.None) {
-              setSortMode(SortModeEnum.Price_Asc);
-            } else if (sortMode === SortModeEnum.Price_Asc) {
               setSortMode(SortModeEnum.Price_Desc);
             } else if (sortMode === SortModeEnum.Price_Desc) {
+              setSortMode(SortModeEnum.Price_Asc);
+            } else if (sortMode === SortModeEnum.Price_Asc) {
               setSortMode(SortModeEnum.None);
             }
           }}
