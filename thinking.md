@@ -1,7 +1,5 @@
 ✅
 
-- Search bar ✅
-- sorting
 - Any thing else?
 - App icon
 - Ability to create product
