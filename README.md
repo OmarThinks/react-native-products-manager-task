@@ -26,6 +26,7 @@
 - A screen for viewing product details ✅
 - Ability to create a product ✅
 - Ability to edit a product ✅
+- Ability to delete a single product ✅
 - App icon ✅
 - Dark and light theme ✅
 - Persistent storage using AsyncStorage ✅
