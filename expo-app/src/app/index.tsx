@@ -1,16 +1,21 @@
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import { useState } from "react";
 import {
+  Alert,
   FlatList,
   TouchableOpacity,
   useWindowDimensions,
   View,
 } from "react-native";
+import { useDispatch } from "react-redux";
+import { Toast } from "toastify-react-native";
 import ProductItemCard from "../components/cards/ProductItemCard";
+import FooterButton from "../components/Views/Footer/FooterButton";
 import { Header } from "../components/Views/Header";
 import { useProducts } from "../redux/slices/productsSlice/productsHooks";
+import { deleteMultipleProducts } from "../redux/slices/productsSlice/productsSlice";
 import { useColors } from "../redux/slices/themeSlice/colorsHooks";
 import { ProductType } from "../types/ProductType";
-import { useState } from "react";
 
 function Index() {
   const colors = useColors();
@@ -19,11 +24,11 @@ function Index() {
   const products = _products;
 
   const { width, height } = useWindowDimensions();
+  const dispatch = useDispatch();
 
   const isVertical = height > width;
   const columnsNumber = isVertical ? 1 : 2;
 
-  //const [isMultiSelectActive, setIsMultiSelectActive] = useState(false);
   const [selectedIds, setSelectedIds] = useState<Set<number>>(() => new Set());
   const toggleSelect = (id: number) => {
     const newSet = new Set(selectedIds);
@@ -84,6 +89,55 @@ function Index() {
           <FontAwesome6 name="plus" size={24} color={colors.text} />
         </TouchableOpacity>
       </View>
+      {isMultiSelectActive && (
+        <View
+          style={{ backgroundColor: colors.primary }}
+          className=" self-stretch flex-row justify-between items-center px-2 py-3 gap-4"
+        >
+          <FooterButton
+            text="Cancel"
+            onPress={deactivateMultiSelect}
+            iconName="xmark"
+          />
+          <FooterButton
+            text="Select All"
+            onPress={() => {
+              const allIds = new Set(products.map((p) => p.id));
+              setSelectedIds(allIds);
+            }}
+            iconName="check"
+          />
+          <FooterButton
+            text="Delete"
+            onPress={() => {
+              Alert.alert(
+                "Delete",
+                `Delete ${selectedIds.size} selected items?`,
+                [
+                  {
+                    text: "Cancel",
+                    style: "cancel",
+                  },
+                  {
+                    text: "Delete",
+                    style: "destructive",
+                    onPress: () => {
+                      dispatch(
+                        deleteMultipleProducts({ ids: Array.from(selectedIds) })
+                      );
+                      deactivateMultiSelect();
+                      Toast.success(
+                        `${selectedIds.size} products deleted successfully 🎉`
+                      );
+                    },
+                  },
+                ]
+              );
+            }}
+            iconName="trash"
+          />
+        </View>
+      )}
     </View>
   );
 }
