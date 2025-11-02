@@ -3,10 +3,11 @@
 - Multiple select
 - Multiple delete
 - Quit multiple select mode
-- Ability to create product
 - sorting
 - Any thing else?
+- App icon
+- Ability to create product
 
 # Auth:
 
-# Ability to reset
+# Ability to reset products list

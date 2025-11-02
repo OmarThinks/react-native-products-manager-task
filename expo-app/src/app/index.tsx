@@ -10,6 +10,7 @@ import { Header } from "../components/Views/Header";
 import { useProducts } from "../redux/slices/productsSlice/productsHooks";
 import { useColors } from "../redux/slices/themeSlice/colorsHooks";
 import { ProductType } from "../types/ProductType";
+import { useState } from "react";
 
 function Index() {
   const colors = useColors();
@@ -22,6 +23,25 @@ function Index() {
   const isVertical = height > width;
   const columnsNumber = isVertical ? 1 : 2;
 
+  const [isMultiSelectActive, setIsMultiSelectActive] = useState(false);
+  const [selectedIds, setSelectedIds] = useState<Set<number>>(() => new Set());
+  const toggleSelect = (id: number) => {
+    const newSet = new Set(selectedIds);
+    if (newSet.has(id)) {
+      newSet.delete(id);
+    } else {
+      newSet.add(id);
+    }
+    setSelectedIds(newSet);
+  };
+  const activateMultiSelect = () => {
+    setIsMultiSelectActive(true);
+  };
+  const deactivateMultiSelect = () => {
+    setIsMultiSelectActive(false);
+    setSelectedIds(new Set());
+  };
+
   const RenderProduct = ({ item }: { item: ProductType }) => (
     <View
       style={{
@@ -30,7 +50,14 @@ function Index() {
         maxWidth: columnsNumber > 1 ? "50%" : "100%",
       }}
     >
-      <ProductItemCard product={item} key={item.id} />
+      <ProductItemCard
+        product={item}
+        key={item.id}
+        activateMultiSelect={activateMultiSelect}
+        selectedIds={selectedIds}
+        toggleSelect={toggleSelect}
+        isMultiSelectActive={isMultiSelectActive}
+      />
     </View>
   );
 
