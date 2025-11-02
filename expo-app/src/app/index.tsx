@@ -1,5 +1,5 @@
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Alert,
   FlatList,
@@ -22,15 +22,31 @@ function Index() {
   const colors = useColors();
   const _products = useProducts();
 
-  const products = _products;
+  const [searchText, setSearchText] = useState("");
+
+  const products = useMemo(() => {
+    const realSearchText = searchText.trim().toLowerCase();
+    if (realSearchText.length < 3) {
+      return _products;
+    }
+
+    const filteredProducts: ProductType[] = [];
+
+    for (const product of _products) {
+      const productTitle = product.title.trim().toLowerCase();
+      if (productTitle.includes(realSearchText)) {
+        filteredProducts.push(product);
+      }
+    }
+
+    return filteredProducts;
+  }, [_products, searchText]);
 
   const { width, height } = useWindowDimensions();
   const dispatch = useDispatch();
 
   const isVertical = height > width;
   const columnsNumber = isVertical ? 1 : 2;
-
-  const [searchText, setSearchText] = useState("");
 
   const [selectedIds, setSelectedIds] = useState<Set<number>>(() => new Set());
   const toggleSelect = (id: number) => {
