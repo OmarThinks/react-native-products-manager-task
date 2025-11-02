@@ -32,3 +32,4 @@
 ## Todo:
 
 - Persistent storage using AsyncStorage
+- Ability to reset products

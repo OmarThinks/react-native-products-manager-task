@@ -3,9 +3,16 @@ import { useAppDispatch } from "../redux/store";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StorageKeysEnum } from "../storage/StorageKeysEnum";
 import { useEffect, useState } from "react";
+import {
+  resetProductsState,
+  setProductsList,
+} from "../redux/slices/productsSlice/productsSlice";
+import { initialProducts } from "../redux/slices/productsSlice/initialProducts";
 
 const useIsAppInitialized = () => {
   const [isThemeInitialized, setIsThemeInitialized] = useState(false);
+  const [isProductsListInitialized, setIsProductsListInitialized] =
+    useState(false);
 
   const dispatch = useAppDispatch();
 
@@ -28,7 +35,28 @@ const useIsAppInitialized = () => {
     initializeTheme();
   }, []);
 
-  const isAppInitialized = isThemeInitialized;
+  useEffect(() => {
+    const initializeProductsList = async () => {
+      console.log("initializing products list...");
+      const storedProductsList = await AsyncStorage.getItem(
+        StorageKeysEnum.PRODUCTS_LIST
+      );
+
+      if (storedProductsList) {
+        const products = JSON.parse(storedProductsList);
+        // Dispatch an action to set the products list in the Redux store
+        dispatch(setProductsList({ products }));
+      } else {
+        dispatch(setProductsList({ products: initialProducts }));
+      }
+
+      setIsProductsListInitialized(true);
+    };
+
+    initializeProductsList();
+  }, []);
+
+  const isAppInitialized = isThemeInitialized && isProductsListInitialized;
 
   return isAppInitialized;
 };
