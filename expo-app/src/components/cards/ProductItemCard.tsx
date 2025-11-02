@@ -8,13 +8,11 @@ import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 const ProductItemCard = ({
   product,
-  activateMultiSelect,
   selectedIds,
   toggleSelect,
   isMultiSelectActive,
 }: {
   product: ProductType;
-  activateMultiSelect: () => void;
   selectedIds: Set<number>;
   toggleSelect: (id: number) => void;
   isMultiSelectActive: boolean;
@@ -41,7 +39,6 @@ const ProductItemCard = ({
       onLongPress={() => {
         console.log("Long Press");
         if (!isMultiSelectActive) {
-          activateMultiSelect();
           toggleSelect(product.id);
         }
       }}

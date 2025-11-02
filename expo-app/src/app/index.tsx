@@ -23,7 +23,7 @@ function Index() {
   const isVertical = height > width;
   const columnsNumber = isVertical ? 1 : 2;
 
-  const [isMultiSelectActive, setIsMultiSelectActive] = useState(false);
+  //const [isMultiSelectActive, setIsMultiSelectActive] = useState(false);
   const [selectedIds, setSelectedIds] = useState<Set<number>>(() => new Set());
   const toggleSelect = (id: number) => {
     const newSet = new Set(selectedIds);
@@ -34,13 +34,12 @@ function Index() {
     }
     setSelectedIds(newSet);
   };
-  const activateMultiSelect = () => {
-    setIsMultiSelectActive(true);
-  };
+
   const deactivateMultiSelect = () => {
-    setIsMultiSelectActive(false);
     setSelectedIds(new Set());
   };
+
+  const isMultiSelectActive = selectedIds.size > 0;
 
   const RenderProduct = ({ item }: { item: ProductType }) => (
     <View
@@ -53,7 +52,6 @@ function Index() {
       <ProductItemCard
         product={item}
         key={item.id}
-        activateMultiSelect={activateMultiSelect}
         selectedIds={selectedIds}
         toggleSelect={toggleSelect}
         isMultiSelectActive={isMultiSelectActive}
