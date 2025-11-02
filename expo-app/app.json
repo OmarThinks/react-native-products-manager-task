@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "expo-app",
-    "slug": "expo-app",
+    "name": "Products Manager",
+    "slug": "products-manager",
     "version": "1.0.0",
     "icon": "./assets/images/new-app-icon.png",
-    "scheme": "expoapp",
+    "scheme": "products-manager",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -42,6 +42,12 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "add6b6c9-3548-4f75-8908-022b3372191c"
+      }
     }
   }
 }
