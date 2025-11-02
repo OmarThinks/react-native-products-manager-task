@@ -1,11 +1,9 @@
 import FooterButton from "@/src/components/Views/Footer/FooterButton";
 import { Header } from "@/src/components/Views/Header";
-import { useProducts } from "@/src/redux/slices/productsSlice/productsHooks";
-import { editSingleProduct } from "@/src/redux/slices/productsSlice/productsSlice";
+import { addProduct } from "@/src/redux/slices/productsSlice/productsSlice";
 import { useColors } from "@/src/redux/slices/themeSlice/colorsHooks";
 import { useAppDispatch } from "@/src/redux/store";
-import { ProductType } from "@/src/types/ProductType";
-import { router, useLocalSearchParams } from "expo-router";
+import { router } from "expo-router";
 import { useFormik } from "formik";
 import React from "react";
 import {
@@ -16,26 +14,19 @@ import {
   View,
 } from "react-native";
 import { Toast } from "toastify-react-native";
-import * as Yup from "yup";
+import { EditProductSchema } from "./edit/[id]";
 
-const EditProduct = () => {
-  const { id }: { id: string } = useLocalSearchParams();
-  const products = useProducts();
-
-  const product = products.find(
-    (item) => item.id === Number(id)
-  ) as ProductType;
-
+const CreateProduct = () => {
   const colors = useColors();
 
   const dispatch = useAppDispatch();
 
   const formik = useFormik({
     initialValues: {
-      title: product.title,
-      description: product.description,
-      price: product.price,
-      image: product.image,
+      title: "",
+      description: "",
+      price: 0,
+      image: "",
     },
     validationSchema: EditProductSchema,
     onSubmit: (values) => {
@@ -43,19 +34,19 @@ const EditProduct = () => {
       formik.validateForm();
       if (formik.isValid) {
         dispatch(
-          editSingleProduct({
-            updatedProduct: {
-              id: product.id,
+          addProduct({
+            newProduct: {
+              id: Math.floor(Math.random() * 1000000),
               title: values.title,
               description: values.description,
               price: Number(values.price),
               image: values.image,
-              tags: product.tags,
+              tags: [],
             },
           })
         );
         router.back();
-        Toast.success("Product edited successfully 🎉");
+        Toast.success("Product created successfully 🎉");
       }
     },
   });
@@ -65,7 +56,7 @@ const EditProduct = () => {
       className=" self-stretch flex-1"
       style={{ backgroundColor: colors.background }}
     >
-      <Header title="Edit Product" />
+      <Header title="Create Product" />
       <ScrollView
         className=" self-stretch flex-1"
         contentContainerClassName=" px-2 py-4"
@@ -103,9 +94,9 @@ const EditProduct = () => {
         className=" self-stretch flex-row justify-between items-center px-2 py-3 gap-4"
       >
         <FooterButton
-          text="Save"
+          text="Create"
           onPress={formik.handleSubmit}
-          iconName="save"
+          iconName="plus"
         />
       </View>
     </View>
@@ -147,17 +138,4 @@ const FieldContainer = ({
   );
 };
 
-const EditProductSchema = Yup.object().shape({
-  title: Yup.string()
-    .min(3, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required"),
-  description: Yup.string()
-    .min(3, "Too Short!")
-    .max(1000, "Too Long!")
-    .required("Required"),
-  price: Yup.number().min(0, "Invalid price").required("Required"),
-  image: Yup.string().url("Invalid URL").required("Required"),
-});
-
-export default EditProduct;
+export default CreateProduct;

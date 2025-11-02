@@ -157,7 +157,8 @@ const EditProductSchema = Yup.object().shape({
     .max(1000, "Too Long!")
     .required("Required"),
   price: Yup.number().min(0, "Invalid price").required("Required"),
-  image: Yup.string().url("Invalid URL").required("Required"),
+  image: Yup.string().url("Invalid URL").optional(),
 });
 
 export default EditProduct;
+export { EditProductSchema };

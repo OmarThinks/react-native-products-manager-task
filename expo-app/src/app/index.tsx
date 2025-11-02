@@ -17,6 +17,7 @@ import { useProducts } from "../redux/slices/productsSlice/productsHooks";
 import { deleteMultipleProducts } from "../redux/slices/productsSlice/productsSlice";
 import { useColors } from "../redux/slices/themeSlice/colorsHooks";
 import { ProductType } from "../types/ProductType";
+import { router } from "expo-router";
 
 enum SortModeEnum {
   None,
@@ -144,6 +145,9 @@ function Index() {
         <TouchableOpacity
           className=" absolute right-2 bottom-2 justify-center items-center rounded-full w-[48px] h-[48px]"
           style={{ backgroundColor: colors.primary }}
+          onPress={() => {
+            router.push("/product/create");
+          }}
         >
           <FontAwesome6 name="plus" size={24} color={colors.text} />
         </TouchableOpacity>
