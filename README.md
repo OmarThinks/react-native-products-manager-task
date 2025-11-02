@@ -28,8 +28,7 @@
 - Ability to edit a product
 - App icon
 - Dark and light theme
+- Persistent storage using AsyncStorage
+- Ability to reset products to initial state
 
 ## Todo:
-
-- Persistent storage using AsyncStorage
-- Ability to reset products
