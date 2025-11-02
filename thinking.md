@@ -1,13 +1,10 @@
 ✅
 
-- Multiple select ✅
-- Multiple delete ✅
-- Quit multiple select mode ✅
+- Search bar
 - sorting
 - Any thing else?
 - App icon
 - Ability to create product
-- Serach bar
 
 # Auth:
 

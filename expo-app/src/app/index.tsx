@@ -3,6 +3,7 @@ import { useState } from "react";
 import {
   Alert,
   FlatList,
+  TextInput,
   TouchableOpacity,
   useWindowDimensions,
   View,
@@ -28,6 +29,8 @@ function Index() {
 
   const isVertical = height > width;
   const columnsNumber = isVertical ? 1 : 2;
+
+  const [searchText, setSearchText] = useState("");
 
   const [selectedIds, setSelectedIds] = useState<Set<number>>(() => new Set());
   const toggleSelect = (id: number) => {
@@ -71,6 +74,22 @@ function Index() {
     >
       <Header title="Home" />
       <View className=" flex-1 self-stretch">
+        <TextInput
+          placeholder="Search..."
+          value={searchText}
+          onChangeText={setSearchText}
+          className=" border p-2"
+          style={{
+            borderColor: colors.primary,
+            color: colors.text,
+            marginHorizontal: 10,
+            marginVertical: 5,
+            borderWidth: 1,
+            borderBottomWidth: 1,
+            borderRadius: 8,
+          }}
+          placeholderTextColor={colors.placeholder}
+        />
         <FlatList
           data={products}
           renderItem={RenderProduct}
