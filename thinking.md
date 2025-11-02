@@ -1,6 +1,6 @@
 ✅
 
-- Search bar
+- Search bar ✅
 - sorting
 - Any thing else?
 - App icon

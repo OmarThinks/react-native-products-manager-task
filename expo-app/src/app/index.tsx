@@ -18,11 +18,18 @@ import { deleteMultipleProducts } from "../redux/slices/productsSlice/productsSl
 import { useColors } from "../redux/slices/themeSlice/colorsHooks";
 import { ProductType } from "../types/ProductType";
 
+enum SortModeEnum {
+  None,
+  Price_Asc,
+  Price_Desc,
+}
+
 function Index() {
   const colors = useColors();
   const _products = useProducts();
 
   const [searchText, setSearchText] = useState("");
+  const [sortMode, setSortMode] = useState(SortModeEnum.None);
 
   const products = useMemo(() => {
     const realSearchText = searchText.trim().toLowerCase();
@@ -130,6 +137,32 @@ function Index() {
           style={{ backgroundColor: colors.primary }}
         >
           <FontAwesome6 name="plus" size={24} color={colors.text} />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          className=" absolute left-2 bottom-2 justify-center items-center rounded-full w-[48px] h-[48px]"
+          style={{ backgroundColor: colors.primary }}
+          onPress={() => {
+            if (sortMode === SortModeEnum.None) {
+              setSortMode(SortModeEnum.Price_Asc);
+            } else if (sortMode === SortModeEnum.Price_Asc) {
+              setSortMode(SortModeEnum.Price_Desc);
+            } else if (sortMode === SortModeEnum.Price_Desc) {
+              setSortMode(SortModeEnum.None);
+            }
+          }}
+        >
+          <FontAwesome6
+            name={
+              sortMode === SortModeEnum.None
+                ? "sort"
+                : sortMode === SortModeEnum.Price_Asc
+                  ? "sort-up"
+                  : "sort-down"
+            }
+            size={24}
+            color={colors.text}
+          />
         </TouchableOpacity>
       </View>
       {isMultiSelectActive && (
