@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   useWindowDimensions,
   View,
+  Text,
 } from "react-native";
 import { useDispatch } from "react-redux";
 import { Toast } from "toastify-react-native";
@@ -51,6 +52,15 @@ function Index() {
           filteredProducts.push(product);
           continue;
         }
+        const productDescriptionModified = product.description
+          .trim()
+          .toLowerCase();
+
+        if (productDescriptionModified.includes(realSearchText)) {
+          filteredProducts.push(product);
+          continue;
+        }
+
         for (const tag of product.tags) {
           const productTag = tag.trim().toLowerCase();
           if (productTag.includes(realSearchText)) {
@@ -134,6 +144,7 @@ function Index() {
           }}
           placeholderTextColor={colors.placeholder}
         />
+
         <FlatList
           data={products}
           renderItem={RenderProduct}
@@ -143,6 +154,25 @@ function Index() {
           key={columnsNumber}
           style={{ paddingVertical: 10 }}
           contentContainerStyle={{ paddingVertical: 10, paddingBottom: 30 }}
+          ListEmptyComponent={
+            <View className=" self-stretch flex-1 justify-center items-center px-8">
+              <Text
+                style={{
+                  color: colors.text,
+                  fontSize: 42,
+                  fontWeight: "semibold",
+                  textAlign: "center",
+                }}
+              >
+                No Content Available
+              </Text>
+            </View>
+          }
+          refreshing={false}
+          onRefresh={() => {
+            dispatch(resetProductsState());
+            Toast.success("Products list reset successfully 🎉");
+          }}
         />
 
         <View className=" absolute right-2 bottom-2 gap-3">

@@ -25,7 +25,7 @@ const ProductItemCard = ({
 
   return (
     <TouchableOpacity
-      className=" self-stretch rounded-[8px] border px-3 py-3 flex-row gap-2"
+      className=" self-stretch rounded-[8px] border px-3 py-3 flex-row gap-2 flex-grow flex-shrink"
       style={{
         borderColor: activeColor,
       }}
@@ -61,9 +61,7 @@ const ProductItemCard = ({
         >
           {product.title}
         </Text>
-        <Text style={{ color: colors.text }} numberOfLines={1}>
-          {product.description}
-        </Text>
+        <Text style={{ color: colors.text }}>{product.description}</Text>
         <Text
           style={{ color: colors.text }}
           numberOfLines={1}
